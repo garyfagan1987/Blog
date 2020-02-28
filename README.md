@@ -1,4 +1,4 @@
-# my-project
+# blog
 
 ## Project setup
 ```
