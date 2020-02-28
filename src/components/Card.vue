@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <router-link :to="linkPath">
-      <foo v-if="article.image.url" :src="article.image.url" :alt="article.name" />
+      <my-image v-if="article.image.url" :src="article.image.url" :alt="article.name" />
     </router-link>
     <div>
       <h2>
@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import Foo from '@/components/Image.vue';
+import MyImage from '@/components/Image.vue';
 import SubHeading from '@/components/SubHeading.vue';
 
 export default {
   name: 'Card',
   components: {
-    Foo,
+    MyImage,
     SubHeading,
   },
   props: {

@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <foo :alt="article.name" :src="article.image.url" />
+    <my-image :alt="article.name" :src="article.image.url" />
     <div class="container">
       <breadcrumb :label="article.name" />
       <h1>{{article.name}}</h1>
@@ -17,7 +17,7 @@ import VueAxios from 'vue-axios';
 import Markdown from 'vue-markdown';
 
 import Breadcrumb from '@/components/Breadcrumb.vue';
-import Foo from '@/components/Image.vue';
+import MyImage from '@/components/Image.vue';
 import SubHeading from '@/components/SubHeading.vue';
 
 Vue.use(VueAxios, axios);
@@ -28,7 +28,7 @@ export default {
   name: 'Article',
   components: {
     Breadcrumb,
-    Foo,
+    MyImage,
     Markdown,
     SubHeading,
   },
