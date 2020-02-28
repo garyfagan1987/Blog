@@ -7,7 +7,7 @@
       <h2>
         <router-link :to="linkPath">{{ article.name }}</router-link>
       </h2>
-      <sub-heading :date="article.date" :content="article.content" />
+      <sub-heading :posted="article.date" :timeToRead="article.content" />
       <p>{{ article.excerpt }}</p>
       <router-link :to="linkPath">Read more</router-link>
     </div>

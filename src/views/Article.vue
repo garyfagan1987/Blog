@@ -4,7 +4,7 @@
     <div class="container">
       <breadcrumb :label="article.name" />
       <h1>{{article.name}}</h1>
-      <sub-heading :timeToRead="timeToRead" :posted="posted" />
+      <sub-heading :timeToRead="article.content" :posted="article.date" />
       <markdown :source="article.content" />
     </div>
   </div>
@@ -14,8 +14,6 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import readingTime from 'reading-time';
-import dayjs from 'dayjs';
 import Markdown from 'vue-markdown';
 
 import Breadcrumb from '@/components/Breadcrumb.vue';
@@ -49,8 +47,6 @@ export default {
       axios.get(process.env.VUE_APP_API_ARTICLES_PATH).then((response) => {
         const name = this.$route.params.pathMatch.replace(/-/g, ' ');
         this.article = response.data.find((a) => a.name === name);
-        this.timeToRead = readingTime(this.article.content).text;
-        this.posted = dayjs(this.article.date).format('MMM DD, YYYY');
       });
     },
   },

@@ -1,13 +1,22 @@
 <template>
   <small class="time">
-      {{posted}} - {{timeToRead}}
+      {{date}} - {{time}}
   </small>
 </template>
 
 <script>
+import readingTime from 'reading-time';
+import dayjs from 'dayjs';
+
 export default {
   props: ['posted', 'timeToRead'],
   name: 'SubHeading',
+  data() {
+    return {
+      time: readingTime(this.timeToRead).text,
+      date: dayjs(this.posted).format('MMM DD, YYYY'),
+    };
+  },
 };
 </script>
 
