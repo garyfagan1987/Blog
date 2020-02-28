@@ -41,7 +41,8 @@ import Card from '@/components/Card.vue';
 
 Vue.use(VueAxios, axios);
 
-const PER_PAGE = 5;
+const START = 0;
+const PER_PAGE = 2;
 
 export default {
   name: 'Home',
@@ -52,23 +53,25 @@ export default {
   data() {
     return {
       articles: [],
-      limit: PER_PAGE,
+      end: PER_PAGE,
+      start: START,
       total: null,
     };
   },
   methods: {
-    getArticles(limit) {
-      this.axios.get(`${process.env.VUE_APP_API_ARTICLES_PATH}?_start=0&_limit=${limit}`).then((response) => {
-        this.articles = response.data;
+    getArticles() {
+      this.axios.get(`${process.env.VUE_APP_API_ARTICLES_PATH}?_start=${this.start}&_limit=${this.end}`).then((response) => {
+        this.articles = this.articles.concat(response.data);
       });
     },
     getMoreArticles() {
-      this.limit += PER_PAGE;
-      this.getArticles(this.limit);
+      this.start += PER_PAGE;
+      this.end = this.start + PER_PAGE;
+      this.getArticles();
     },
   },
   mounted() {
-    this.getArticles(this.limit);
+    this.getArticles();
     this.axios.get(`${process.env.VUE_APP_API_ARTICLES_PATH}/count`).then((response) => {
       this.total = response.data;
     });
