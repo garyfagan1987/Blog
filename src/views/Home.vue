@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <alert :error="error" />
     <div class="hero">
       <div class="container">
         <div class="flex">
@@ -24,7 +25,7 @@
         v-for="article in articles"
         :key="article.name"
       />
-      <div>
+      <div v-if="articles.length > 0">
         <Button :click="getMoreArticles" :disabled="articles.length === total" label="Load more" />
       </div>
     </div>
@@ -36,6 +37,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
+import Alert from '@/components/Alert.vue';
 import Button from '@/components/Button.vue';
 import Card from '@/components/Card.vue';
 
@@ -47,6 +49,7 @@ const PER_PAGE = 2;
 export default {
   name: 'Home',
   components: {
+    Alert,
     Button,
     Card,
   },
@@ -54,6 +57,7 @@ export default {
     return {
       articles: [],
       end: PER_PAGE,
+      error: null,
       start: START,
       total: null,
     };
@@ -62,6 +66,8 @@ export default {
     getArticles() {
       this.axios.get(`${process.env.VUE_APP_API_ARTICLES_PATH}?_start=${this.start}&_limit=${this.end}`).then((response) => {
         this.articles = this.articles.concat(response.data);
+      }).catch(() => {
+        this.error = true;
       });
     },
     getMoreArticles() {
@@ -74,6 +80,8 @@ export default {
     this.getArticles();
     this.axios.get(`${process.env.VUE_APP_API_ARTICLES_PATH}/count`).then((response) => {
       this.total = response.data;
+    }).catch(() => {
+      this.error = true;
     });
   },
 };

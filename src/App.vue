@@ -8,6 +8,7 @@
 :root {
   --color: 153, 47%;
   --l: 49%;
+  --color-danger: #D81C1C;
   --color-grey: #BBB;
   --color-grey-dark: #777;
   --color-grey-light: #EEE;
@@ -45,6 +46,7 @@ body {
 
 a {
   color: #42b983;
+  text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
