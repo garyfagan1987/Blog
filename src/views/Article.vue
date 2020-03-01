@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <my-image :alt="article.name" :src="article.image.url" />
+    <my-image as="background" :alt="article.name" :src="article.image.url" />
     <div class="container">
       <breadcrumb :label="article.name" />
       <h1>{{article.name}}</h1>

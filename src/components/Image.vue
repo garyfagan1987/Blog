@@ -1,11 +1,29 @@
 <template>
-    <img :src="path" :alt="alt" />
+  <div
+    class="background"
+    v-if="as === 'background'" :style="{backgroundImage: `url('${path}')`}"
+  />
+  <img v-else :src="path" :alt="alt" />
 </template>
 
 <script>
 export default {
   name: 'Foo',
-  props: ['alt', 'src'],
+  props: {
+    alt: {
+      type: String,
+      required: true,
+    },
+    as: {
+      default: 'image',
+      type: String,
+      required: false,
+    },
+    src: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       path: '',
@@ -16,3 +34,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .background {
+    background-attachment: fixed;
+    background-position: top;
+    background-size: contain;
+    height: 53vh;
+    max-height: 415px;
+    width: 100%;
+  }
+</style>
