@@ -1,5 +1,5 @@
 <template>
-    <div class="alert" v-if="show">
+    <div class="alert">
         <span>There was an error</span>
     </div>
 </template>
@@ -8,16 +8,6 @@
 export default {
   name: 'Alert',
   props: ['error'],
-  data() {
-    return {
-      show: null,
-    };
-  },
-  watch: {
-    error: function error(value) {
-      this.show = value;
-    },
-  },
 };
 </script>
 

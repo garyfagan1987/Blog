@@ -1,6 +1,7 @@
 <template>
   <div class="hero">
     <div class="container">
+      <alert v-if="error" />
       <div v-if="loaded">
         <div class="flex">
           <div>
@@ -12,7 +13,7 @@
           </div>
         </div>
       </div>
-      <div v-else>
+      <div v-else-if="!loaded && !error">
         <spinner />
       </div>
     </div>
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import Alert from '@/components/Alert.vue';
 import MyImage from '@/components/Image.vue';
 import Spinner from '@/components/Spinner.vue';
 
@@ -27,6 +29,7 @@ export default {
   name: 'Hero',
   props: ['content', 'loaded', 'error'],
   components: {
+    Alert,
     MyImage,
     Spinner,
   },
