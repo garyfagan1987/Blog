@@ -57,7 +57,7 @@ export default {
     return {
       articles: [],
       end: PER_PAGE,
-      error: null,
+      error: false,
       start: START,
       total: null,
     };

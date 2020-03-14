@@ -1,11 +1,14 @@
 <template>
   <div class="about">
-    <my-image as="background" :alt="article.name" :src="article.image.url" />
-    <div class="container">
-      <breadcrumb :label="article.name" />
-      <h1>{{article.name}}</h1>
-      <sub-heading :timeToRead="article.content" :posted="article.date" />
-      <markdown :source="article.content" />
+    <alert :error="error" />
+    <div v-if="loaded">
+      <my-image v-if="article" as="background" :alt="article.name" :src="article.image.url" />
+      <div class="container">
+        <breadcrumb :label="article.name" />
+        <h1>{{article.name}}</h1>
+        <sub-heading :timeToRead="article.content" :posted="article.date" />
+        <markdown :source="article.content" />
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +19,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Markdown from 'vue-markdown';
 
+import Alert from '@/components/Alert.vue';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import MyImage from '@/components/Image.vue';
 import SubHeading from '@/components/SubHeading.vue';
@@ -27,6 +31,7 @@ Vue.use(Markdown);
 export default {
   name: 'Article',
   components: {
+    Alert,
     Breadcrumb,
     MyImage,
     Markdown,
@@ -35,6 +40,8 @@ export default {
   data() {
     return {
       article: {},
+      error: false,
+      loaded: false,
       timeToRead: '',
       posted: null,
     };
@@ -47,6 +54,9 @@ export default {
       axios.get(process.env.VUE_APP_API_ARTICLES_PATH).then((response) => {
         const name = this.$route.params.pathMatch.replace(/-/g, ' ');
         this.article = response.data.find((a) => a.name === name);
+        this.loaded = true;
+      }).catch(() => {
+        this.error = true;
       });
     },
   },
