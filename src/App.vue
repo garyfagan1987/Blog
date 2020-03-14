@@ -4,6 +4,22 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  watch: {
+    $route: function route() {
+      if (this.$route.name.toLowerCase() === 'home') {
+        document.title = 'Blog';
+      } else {
+        const name = this.$route.params.pathMatch.replace(/-/g, ' ');
+        document.title = name;
+      }
+    },
+  },
+};
+</script>
+
 <style>
 :root {
   --color: 153, 47%;
