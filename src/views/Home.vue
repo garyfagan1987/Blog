@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <about />
+    <About />
     <div class="container">
-      <articles />
+      <Articles />
     </div>
   </div>
 </template>

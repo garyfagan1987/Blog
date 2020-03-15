@@ -1,17 +1,17 @@
 <template>
   <div class="about">
-    <alert v-if="error" />
+    <Alert v-if="error" />
     <div v-if="loaded">
       <my-image v-if="article" as="background" :alt="article.name" :src="article.image.url" />
       <div class="container">
-        <breadcrumb :label="article.name" />
+        <Breadcrumb :label="article.name" />
         <h1>{{article.name}}</h1>
         <sub-heading :timeToRead="article.content" :posted="article.date" />
         <markdown :source="article.content" />
       </div>
     </div>
     <div v-else-if="!loaded && !error">
-      <spinner />
+      <Spinner />
     </div>
   </div>
 </template>

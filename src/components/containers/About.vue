@@ -1,5 +1,5 @@
 <template>
-  <hero :content="content" :error="error" :loaded="loaded" />
+  <Hero :content="content" :error="error" :loaded="loaded" />
 </template>
 
 <script>
