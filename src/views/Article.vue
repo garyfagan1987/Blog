@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <alert :error="error" />
+    <alert v-if="error" />
     <div v-if="loaded">
       <my-image v-if="article" as="background" :alt="article.name" :src="article.image.url" />
       <div class="container">
@@ -9,6 +9,9 @@
         <sub-heading :timeToRead="article.content" :posted="article.date" />
         <markdown :source="article.content" />
       </div>
+    </div>
+    <div v-else-if="!loaded && !error">
+      <spinner />
     </div>
   </div>
 </template>
@@ -22,6 +25,7 @@ import Markdown from 'vue-markdown';
 import Alert from '@/components/Alert.vue';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import MyImage from '@/components/Image.vue';
+import Spinner from '@/components/Spinner.vue';
 import SubHeading from '@/components/SubHeading.vue';
 
 Vue.use(VueAxios, axios);
@@ -35,6 +39,7 @@ export default {
     Breadcrumb,
     MyImage,
     Markdown,
+    Spinner,
     SubHeading,
   },
   data() {
