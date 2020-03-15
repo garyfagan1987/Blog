@@ -82,4 +82,10 @@ a {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
+
+pre {
+  background-color: var(--color-grey-light);
+  overflow-y: scroll;
+  padding: 20px;
+}
 </style>
