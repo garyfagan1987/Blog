@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <alert v-if="error" />
+    <Alert v-if="error" />
     <div v-if="loaded">
-        <Card :article="article" v-for="article in articles" :key="article.name" />
-        <div v-if="articles.length > 0">
-            <Button
-                :click="getMoreArticles"
-                :disabled="articles.length === total"
-                label="Load more"
-            />
-        </div>
+      <Card :article="article" v-for="article in articles" :key="article.name" />
+      <Center v-if="articles.length > 0">
+        <Button
+          :click="getMoreArticles"
+          :disabled="articles.length === total"
+          label="Load more"
+        />
+      </Center>
     </div>
     <div v-else-if="!loaded && !error">
-        <spinner />
+      <Spinner />
     </div>
   </div>
 </template>
@@ -25,6 +25,7 @@ import VueAxios from 'vue-axios';
 import Alert from '@/components/Alert.vue';
 import Button from '@/components/Button.vue';
 import Card from '@/components/Card.vue';
+import Center from '@/components/Center.vue';
 import Spinner from '@/components/Spinner.vue';
 
 Vue.use(VueAxios, axios);
@@ -38,6 +39,7 @@ export default {
     Alert,
     Button,
     Card,
+    Center,
     Spinner,
   },
   data() {
