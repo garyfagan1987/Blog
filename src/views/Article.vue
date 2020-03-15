@@ -8,6 +8,10 @@
         <h1>{{article.name}}</h1>
         <sub-heading :timeToRead="article.content" :posted="article.date" />
         <markdown :source="article.content" />
+        <Badge
+          v-for="category in article.categories"
+          :key="category"
+          :label="category.name" />
       </div>
     </div>
     <div v-else-if="!loaded && !error">
@@ -23,6 +27,7 @@ import VueAxios from 'vue-axios';
 import Markdown from 'vue-markdown';
 
 import Alert from '@/components/Alert.vue';
+import Badge from '@/components/Badge.vue';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import MyImage from '@/components/Image.vue';
 import Spinner from '@/components/Spinner.vue';
@@ -36,6 +41,7 @@ export default {
   name: 'Article',
   components: {
     Alert,
+    Badge,
     Breadcrumb,
     MyImage,
     Markdown,
@@ -56,9 +62,10 @@ export default {
   },
   methods: {
     fetchArticles() {
-      axios.get(process.env.VUE_APP_API_ARTICLES_PATH).then((response) => {
-        const name = this.$route.params.pathMatch.replace(/-/g, ' ');
-        this.article = response.data.find((a) => a.name === name);
+      const name = this.$route.params.pathMatch.replace(/-/g, ' ');
+      axios.get(`${process.env.VUE_APP_API_ARTICLES_PATH}?name=${name}`).then((response) => {
+        // eslint-disable-next-line prefer-destructuring
+        this.article = response.data[0];
         this.loaded = true;
       }).catch(() => {
         this.error = true;
@@ -73,13 +80,5 @@ img {
   width: 100%;
   height: 400px;
   object-fit: cover;
-}
-</style>
-
-<style>
-pre {
-  background-color: var(--color-grey-light);
-  overflow-y: scroll;
-  padding: 20px;
 }
 </style>
