@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <Header />
     <Alert v-if="error" />
     <div v-if="loaded">
       <my-image v-if="article" as="background" :alt="article.name" :src="article.image.url" />
@@ -29,6 +30,7 @@ import Markdown from 'vue-markdown';
 import Alert from '@/components/Alert.vue';
 import Badge from '@/components/Badge.vue';
 import Breadcrumb from '@/components/Breadcrumb.vue';
+import Header from '@/components/Header.vue';
 import MyImage from '@/components/Image.vue';
 import Spinner from '@/components/Spinner.vue';
 import SubHeading from '@/components/SubHeading.vue';
@@ -43,6 +45,7 @@ export default {
     Alert,
     Badge,
     Breadcrumb,
+    Header,
     MyImage,
     Markdown,
     Spinner,

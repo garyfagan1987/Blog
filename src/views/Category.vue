@@ -1,5 +1,6 @@
 <template>
   <div class="category">
+    <Header />
     <Alert v-if="error" />
     <div v-if="loaded">
       <my-image v-if="category" as="background" :alt="category.name" :src="category.image.url" />
@@ -32,6 +33,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue';
 import Button from '@/components/Button.vue';
 import Card from '@/components/Card.vue';
 import Center from '@/components/Center.vue';
+import Header from '@/components/Header.vue';
 import MyImage from '@/components/Image.vue';
 import Spinner from '@/components/Spinner.vue';
 
@@ -48,6 +50,7 @@ export default {
     Button,
     Card,
     Center,
+    Header,
     MyImage,
     Spinner,
   },
